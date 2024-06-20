@@ -12,7 +12,7 @@ Public Class SQLiteHelper
 
         Using connection As New SQLiteConnection(DBPath)
             connection.Open()
-            Dim createTableQuery As String = "CREATE TABLE Contact (Id INTEGER PRIMARY KEY, Name TEXT, Email TEXT, Phone INTEGER)"
+            Dim createTableQuery As String = "CREATE TABLE Contact (Id INTEGER PRIMARY KEY, Name TEXT, Email TEXT, Phone INTEGER, IsActive INTEGER)"
             Using command As New SQLiteCommand(createTableQuery, connection)
                 command.ExecuteNonQuery()
             End Using
@@ -24,8 +24,8 @@ Public Class SQLiteHelper
     Shared Sub SeedData()
         Dim contactRepo As New ContactRepository()
 
-        contactRepo.InsertContact(New Core.Contact() With {.Name = "John Doe", .Email = "John@gmail.com", .Phone = 9999999999})
-        contactRepo.InsertContact(New Core.Contact() With {.Name = "Jane Smith", .Email = "Jane@gmail.com", .Phone = 9999999999})
+        contactRepo.InsertContact(New Core.Contact() With {.Name = "John Doe", .Email = "John@gmail.com", .Phone = 9999999999, .IsActive = 0})
+        contactRepo.InsertContact(New Core.Contact() With {.Name = "Jane Smith", .Email = "Jane@gmail.com", .Phone = 9999999999, .IsActive = 1})
     End Sub
 
     Shared Sub RemoveDatabase()
